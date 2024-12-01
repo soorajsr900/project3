@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Project 3</div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/profile">My Profile</a>
+            <a href="/signout">Sign Out</a>
+        </nav>
+    </header>
+    <main>
+        <h1>Your Profile</h1>
+        <div id="user-info">
+            <p>Loading...</p>
+        </div>
+    </main>
+
+    <script>
+        // Fetch user info from the server using JavaScript
+        fetch('/profile')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('user-info').innerHTML = `
+                    <p>Username: ${data.username}</p>
+                    <p>Email: ${data.email}</p>
+                `;
+            })
+            .catch(err => {
+                document.getElementById('user-info').innerHTML = '<p>Error loading profile</p>';
+            });
+    </script>
+</body>
+</html>
